@@ -3,6 +3,8 @@ import './main-page.css';
 import Header from './Header';
 import FeaturedHouse from './FeaturedHouse';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HouseFilter from './HouseFilter';
+import SearchResults from '../search/SearchResult';
 
 function App() {
   const [allHouses, setAllHouses] = useState([]);
@@ -19,7 +21,6 @@ function App() {
   let featuredHouse = useMemo(() => {
     if (allHouses.length) {
       const randomIndex = Math.floor(Math.random() * allHouses.length);
-      console.log(randomIndex);
       return allHouses[randomIndex];
     }
   }, [allHouses]);
@@ -28,8 +29,13 @@ function App() {
     <Router>
       <div className='container'>
         <Header title='Providing houses all over the world' />
+        <HouseFilter allHouses={allHouses} />
 
         <Routes>
+          <Route
+            path='/searchresults/:country'
+            element={<SearchResults allHouses={allHouses} />}
+          />
           <Route path='/' element={<FeaturedHouse house={featuredHouse} />} />
         </Routes>
       </div>
