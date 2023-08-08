@@ -5,6 +5,7 @@ import FeaturedHouse from './FeaturedHouse';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HouseFilter from './HouseFilter';
 import SearchResults from '../search/SearchResult';
+import HouseFromQuery from '../house/HouseFromQuery';
 
 function App() {
   const [allHouses, setAllHouses] = useState([]);
@@ -36,6 +37,12 @@ function App() {
             path='/searchresults/:country'
             element={<SearchResults allHouses={allHouses} />}
           />
+
+          <Route
+            path='/house/:id'
+            element={<HouseFromQuery allHouses={allHouses} />}
+          />
+
           <Route path='/' element={<FeaturedHouse house={featuredHouse} />} />
         </Routes>
       </div>
